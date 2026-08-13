@@ -40,11 +40,11 @@
                       </div>
                       <span ref="audiotitle" class="musicplayer-text"
                         style="top: 1.6rem;font-weight: bolder;"
-                      >{{ musicinfo?.[0]?.title }}</span>
+                      >{{ currentSong?.title }}</span>
                       <span ref="audioauthor" class="musicplayer-text"
                         style="bottom: 1.4rem;"
-                      >{{ musicinfo?.[0]?.author }}</span>
-                      <audio v-show="false" ref="audioPlayer" :src="musicinfo?.[0]?.url"
+                      >{{ currentSong?.author }}</span>
+                      <audio v-show="false" ref="audioPlayer" :src="currentSong?.url"
                       @waiting="onWaiting"
                       @canplay="onCanPlay">
                       </audio>

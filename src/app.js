@@ -165,6 +165,7 @@ export default {
         this.$refs.VdPlayer.controls = false;
       }
     },
+
     audioLoading(val){
       this.isPlaying = !val;
     }
@@ -181,8 +182,9 @@ export default {
 
   computed: {
     currentSong() {
-      return this.musicinfo[this.playlistIndex];
+		  return this.musicinfo?.[this.playlistIndex];
     },
+
     audioPlayer() {
       return this.$refs.audioPlayer;
     }
@@ -256,9 +258,11 @@ export default {
         }
       })
     },
+
     handleCancel(){
       this.dialog1 = false;
     },
+
     jump(url){
       window.open(url, '_blank').focus();
     },
@@ -273,11 +277,27 @@ export default {
         }
         this.musicinfo = await response.json();
         this.musicinfoLoading = false;
+		this.initPlaylistStart();
       } catch (error) {
         console.error('请求失败:', error);
       }
-      
     },
+
+	initPlaylistStart() {
+		if (!this.musicinfo || !this.musicinfo.length) return;
+		const len = this.musicinfo.length;
+		let target = 0;
+		const { randomFirstPlay, startIndex } = this.configdata.musicPlayer || {};
+		if (randomFirstPlay) {
+			target = Math.floor(Math.random() * len);
+		} else if (typeof startIndex === 'number' && Number.isFinite(startIndex)) {
+			const s = Math.floor(startIndex);
+			target = s >= 0 && s < len ? s : 0;
+		}
+		this.playlistIndex = target;
+		this.isPlaying = false;
+	},
+
     musicplayershow(val) {
         this.ismusicplayer = val;
     },
@@ -296,42 +316,56 @@ export default {
       }
       this.isPlaying = !this.musicinfoLoading && !this.isPlaying;
     },
+
     previousTrack() {
       this.playlistIndex = this.playlistIndex > 0 ? this.playlistIndex - 1 : this.musicinfo.length - 1;
       this.updateAudio();
     },
+
     nextTrack() {
       this.playlistIndex = this.playlistIndex < this.musicinfo.length - 1 ? this.playlistIndex + 1 : 0;
       this.updateAudio();
     },
+
     updateAudio() {
-      this.audioPlayer.src = this.currentSong.url;
-      this.$refs.audiotitle.innerText = this.currentSong.title;
-      this.$refs.audioauthor.innerText = this.currentSong.author;
       this.isPlaying = true;
-      this.audioPlayer.play();
+	  this.$nextTick(() => {
+		const p = this.audioPlayer.play();
+		  if (p && p.catch) p.catch(() => { });
+	  });
     },
+
     updateCurrentIndex(index) {
       this.playlistIndex = index;
       this.updateAudio();
     },
+
     updateIsPlaying(isPlaying) {
       this.isPlaying = isPlaying;
     },
+
     updateLyrics(lyrics){
       this.lyrics = lyrics;
     },
+
     // 监听等待事件（缓冲不足）
     onWaiting() {
       this.audioLoading = true;
     },
+
     // 监听可以播放事件（缓冲足够）
     onCanPlay() {
       this.audioLoading = false;
+	  if (this.isPlaying) {
+		  const p = this.audioPlayer.play();
+		  if (p && p.catch) p.catch(() => { });
+	  }
     },
+
     expandSwitch() {
       this.isExpanded = true;
     },
+
     collapseSwitch() {
       this.isExpanded = false;
     },
