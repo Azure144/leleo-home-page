@@ -6,7 +6,7 @@
         <div>
           <v-row align="center">
             <v-col cols="12" md="8">
-				<v-text-field class="v-card"
+				<v-text-field class="v-card  search-field"
 					:style="xs||sm?{'display':'none'}:{}"
 					v-model="searchQuery"
 					placeholder="搜索..."
@@ -208,6 +208,11 @@ export default {
 <style scoped>
 @import url(/css/app.less);
 @import url(/css/mobile.less);
+.search-field {
+	border-radius: 22px !important;
+	overflow: hidden;
+}
+
 .glass-list {
 	background: transparent !important;
 	backdrop-filter: blur(var(--leleo-blur));
