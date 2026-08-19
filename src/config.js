@@ -22,7 +22,7 @@ const config = {
 	blur: 5, // 毛玻璃模糊效果
 
 	// 我的标签
-	测试: ['1', '2', '3', '4', '5', '6', '7', '8'],
+	测试: ['text1', 'text2', 'text3', 'text4', 'text5', 'text6', 'text7', 'text8'],
 
 	// 默认背景壁纸
 	background: {
