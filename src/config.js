@@ -1,9 +1,9 @@
 const config = {
 	//网页元数据
 	metaData: {
-		title: 'Leleo的个人主页🎉',
-		description: '欢迎来到Leleo的奇妙世界！',
-		keywords: 'Leleo,leleo,个人主页,个人网站',
+		title: 'Coccineus的个人主页🎉',
+		description: '欢迎来到Coccineus的奇妙世界！',
+		keywords: 'Cocineus,Coccineus,个人主页,个人网站',
 		icon: '/favicon.ico'   //网页图标，支持外链
 	},
 
@@ -22,7 +22,7 @@ const config = {
 	blur: 5, // 毛玻璃模糊效果
 
 	// 我的标签
-	tags: ['乐观开朗', '温柔体贴', '随和亲切', '冷静沉着', '才思敏捷', '风趣幽默', '刚正不阿', '善解人意'],
+	测试: ['1', '2', '3', '4', '5', '6', '7', '8'],
 
 	// 默认背景壁纸
 	background: {
@@ -53,8 +53,8 @@ const config = {
 
 	//社交按钮
 	socialPlatformIcons: [
-		{ icon: "mdi-github", link: "https://www.github.com/leleo886" },
-		{ icon: "mdi-email", link: "mailto:leleo886@foxmail.com" },
+		{ icon: "mdi-github", link: "https://www.github.com/Azure144" },
+		{ icon: "mdi-email", link: "mailto:Auphanim@outlook.com" },
 		{ icon: "mdi-qqchat", link: "https://im.qq.com/" },
 		{ icon: "mdi-wechat", link: "https://wx.qq.com/" },
 		{ icon: "mdi-youtube", link: "https://www.youtube.com" },
